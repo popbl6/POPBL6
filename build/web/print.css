@@ -1,0 +1,35 @@
+
+
+
+.left {
+  display: none !important;
+}
+
+#breadcrumb {
+  display: none !important;
+}
+
+#menu {
+  display: none !important;
+}
+
+.parkings {
+	border-style: solid;
+	border-width: 3px;
+	border-color: black;
+	text-align: center;
+}
+
+.parkings td{
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+	padding: 3px;
+}
+
+.parkings tr{
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+	padding: 3px;
+}
