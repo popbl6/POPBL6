@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.security.*;
+
 
 /**
  *
@@ -41,7 +43,6 @@ public class Gauzak {
 	private void konexioakEgin() throws ClassNotFoundException, SQLException {
 		Class.forName("org.postgresql.Driver");
 		webDb = DriverManager.getConnection("jdbc:postgresql://localhost:5432/web", "web", "1111");
-		System.out.println("webdb sortuta");
 		//CMDB-ra konektatu
 	}
 
@@ -53,13 +54,12 @@ public class Gauzak {
 
 	public boolean logeatu(String user, String pass){
 		try {
-			if(webDb == null)
-				System.out.println("null da");
 			PreparedStatement stmt = webDb.prepareStatement("select checkUser(?, ?)");
 			stmt.setString(1, user);
 			stmt.setString(2, pass);
 			ResultSet rs = stmt.executeQuery();
-			if(rs.next()){
+			rs.next();
+			if(rs.getString(1) != null){
 				mota = rs.getInt(1);
 				this.user = user;
 			} else {
@@ -68,6 +68,8 @@ public class Gauzak {
 			return true;
 		} catch (SQLException ex) {
 			Logger.getLogger(Gauzak.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (Exception e) {
+			Logger.getLogger(Gauzak.class.getName()).log(Level.SEVERE, null, e);
 		}
 		return false;
 	}
