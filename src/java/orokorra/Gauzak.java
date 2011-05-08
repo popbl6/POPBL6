@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.security.*;
 
 
 /**
@@ -88,77 +87,6 @@ public class Gauzak {
 		return false;
 	}
 
-	
-        public String getMenuaCas(){
-		if(mota == 0){//normal
-			return "<h2>Login :</h2>"
-					 + "	<p>Bienvenido <b>"+user+"</b></p><br>"
-					 + "<p><a href=kontrol.jsp?action=logout>Logout</a>"
-					 + ""
-					 + "		<h2>Menu :</h2>"
-					 + ""
-					 + "<ul>"
-					 + "<li><a href=\"tarifak.jsp\">Tarifas</a></li>"
-					 + "<li><a href=\"kalkulatu.jsp\">Cálculo de la ruta</a></li>"
-					 + "</ul>";
-		}
-		if(mota == 1){//mantenu
-			return "<h2>Login :</h2>"
-					 + "	<p>Bienvenido <b>"+user+"</b></p><br>"
-					 + "<p><a href=kontrol.jsp?action=logout>Logout</a>"
-					 + ""
-					 + "		<h2>Menu :</h2>"
-					 + ""
-					 + "<ul>"
-					 + "<li><a href=\"tarifak.jsp\">Tarifas</a></li>"
-					 + "<li><a href=\"kalkulatu.jsp\">Cálculo de la ruta</a></li>"
-					 + "<li><a href=\"inzidentziak.jsp\">Incidencias</a></li>"
-					 + "</ul>";
-
-		}
-		if(mota == 2){//admin
-			return "<h2>Login :</h2>"
-					 + "	<p>Bienvenido <b>"+user+"</b></p><br>"
-					 + "<p><a href=kontrol.jsp?action=logout>Logout</a>"
-					 + ""
-					 + "		<h2>Menu :</h2>"
-					 + ""
-					 + "<ul>"
-					 + "<li><a href=\"tarifak.jsp\">Tarifas</a></li>"
-					 + "<li><a href=\"kalkulatu.jsp\">Cálculo de la ruta</a></li>"
-					 + "<li><a href=\"adminregister.jsp\">Registro de administrador</a></li>"
-					 + "<li><a href=\"inzidentziak.jsp\">Incidencias</a></li>"
-					 + "<li><a href=\"konfiguratzaile.jsp\">Administrador del base de datos</a></li>"
-					 + "</ul>";
-		}
-		return "<form action=\"kontrol.jsp\" method=\"post\" onsubmit=\"return checkForm(this);\">"
-				 + "<input type=\"hidden\" name=\"action\" value=\"login\" />"
-				 + "<h2>Login :</h2>"
-				 + "	<table>"
-				 + "		<tr>"
-				 + "			<td> <div align=\"right\"><span class=\"Estilo2\"> Usuario : </span></div></td>"
-				 + "			<td> <input name=\"username\" size=12 type=\"text\"/> </td>"
-				 + "		</tr>"
-				 + "		<tr>"
-				 + "			<td> <div align=\"right\"><span class=\"Estilo2\"> Contraseña : </span></div></td>"
-				 + "			<td> <input name=\"password\" size=12 type=\"password\" /> </td>"
-				 + "		</tr>"
-				 + "		<tr>"
-				 + "			<td> <div align=\"right\"><input name=\"submit\" type=\"submit\" value=\"login\" /></div></td>"
-				 + "		  <td><ul>"
-				 + "			<li><a href=\"erregistroa.jsp\">Registrarse</a></li>"
-				 + "		  </ul></td>"
-				 + "		</tr>"
-				 + "	</table>"
-				 + "</form>"
-				 + ""
-				 + "		<h2>Menu :</h2>"
-				 + ""
-				 + "<ul>"
-				 + "<li><a href=\"tarifak.jsp\">Tarifas</a></li>"
-				 + "<li><a href=\"kalkulatu.jsp\">Cálculo de la ruta</a></li>"
-				 + "</ul>";
-	}
 
 	public String getMenua(){
 		if(mota == 0){//normal
@@ -169,8 +97,8 @@ public class Gauzak {
 					 + "		<h2>Menua :</h2>"
 					 + ""
 					 + "<ul>"
-					 + "<li><a href=\"tarifak.jsp\">Tarifak kontsultatu</a></li>"
-					 + "<li><a href=\"kalkulatu.jsp\">Bidea kalkulatu</a></li>"
+					 + "<li><a href=\"aktiboak.jsp\">TI-ak kontsultatu</a></li>"
+					 + "<li><a href=\"inzidentziaSortu.jsp\">Inzidentzia berria</a></li>"
 					 + "</ul>";
 		}
 		if(mota == 1){//mantenu
@@ -181,8 +109,8 @@ public class Gauzak {
 					 + "		<h2>Menua :</h2>"
 					 + ""
 					 + "<ul>"
-					 + "<li><a href=\"tarifak.jsp\">Tarifak kontsultatu</a></li>"
-					 + "<li><a href=\"kalkulatu.jsp\">Bidea kalkulatu</a></li>"
+					 + "<li><a href=\"aktiboak.jsp\">TI-ak kontsultatu</a></li>"
+					 + "<li><a href=\"inzidentziaSortu.jsp\">Inzidentzia berria</a></li>"
 					 + "<li><a href=\"inzidentziak.jsp\">Inzidentziak kudeatu</a></li>"
 					 + "</ul>";
 
@@ -195,11 +123,10 @@ public class Gauzak {
 					 + "		<h2>Menua :</h2>"
 					 + ""
 					 + "<ul>"
-					 + "<li><a href=\"tarifak.jsp\">Tarifak kontsultatu</a></li>"
-					 + "<li><a href=\"kalkulatu.jsp\">Bidea kalkulatu</a></li>"
+					 + "<li><a href=\"aktiboak.jsp\">TI-ak kontsultatu</a></li>"
+					 + "<li><a href=\"inzidentziaSortu.jsp\">Inzidentzia berria</a></li>"
 					 + "<li><a href=\"adminregister.jsp\">Administratzaile erregistroa</a></li>"
 					 + "<li><a href=\"inzidentziak.jsp\">Inzidentziak kudeatu</a></li>"
-					 + "<li><a href=\"konfiguratzaile.jsp\">Datu base kudeatzailea</a></li>"
 					 + "</ul>";
 		}
 		return "<form action=\"kontrol.jsp\" method=\"post\" onsubmit=\"return checkForm(this);\">"
@@ -226,8 +153,8 @@ public class Gauzak {
 				 + "		<h2>Menua :</h2>"
 				 + ""
 				 + "<ul>"
-				 + "<li><a href=\"tarifak.jsp\">Tarifak kontsultatu</a></li>"
-				 + "<li><a href=\"kalkulatu.jsp\">Bidea kalkulatu</a></li>"
+				 + "<li><a href=\"aktiboak.jsp\">TI-ak kontsultatu</a></li>"
+				 + "<li><a href=\"inzidentziaSortu.jsp\">Inzidentzia berria</a></li>"
 				 + "</ul>";
 	}
 
@@ -272,5 +199,47 @@ public class Gauzak {
         }*/
 	
 	//Inzidentzia konpondu funtzioa egin
+
+
+	public String getInzidentziak(){
+		String buff = "";
+
+		buff += placeholderTable(10, 10);
+
+		return buff;
+	}
+
+	public String getAktiboak(){
+		String buff = "";
+
+		buff += placeholderTable(15, 30);
+
+		return buff;
+	}
+
+	private String placeholderTable(int columns, int rows) {
+		String buff = "";
+
+		buff += "<table class=inzidentziak>\n"
+				+	"\t<thead>\n"
+                +		"\t\t<tr>\n";
+		for(int i = 0; i<columns; i++)
+			buff +=			"\t\t\t<td>Zutabe"+i+"</td>\n";
+        buff +=			"\t\t</tr>\n"
+                +	"\t</thead>\n"
+                +	"\t<tbody>\n";
+
+		for(int i=0; i<rows; i++){
+			buff += "\t\t<tr>\n";
+			for(int j=0; j<columns; j++){
+				buff += "\t\t\t<td>zutabe"+j+"row"+i+"</td>\n";
+			}
+			buff += "\t\t</tr>\n";
+		}
+		buff += "\t<tbody>\n";
+		buff += "<table>\n";
+
+		return buff;
+	}
 
 }

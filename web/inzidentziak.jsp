@@ -55,27 +55,23 @@
 <li><a href="index.jsp">Etxea</a></li>
 <li><a href="erabili.jsp">Nola Erabili</a></li>
 <li><a href="kontaktua.jsp">Kontaktua</a></li>
-<li><a href="cas/inzidentziak.jsp">En castellano</a></li>
 </ul>
 </div>
 
 <div id="content">
 <div class="right">
-    <a href="kontrol.jsp?action=changedb&db=0">1. Parkina</a>
-    <a href="kontrol.jsp?action=changedb&db=1">2. Parkina</a>
-    <a href="kontrol.jsp?action=changedb&db=2">3. Parkina</a>
-    <a href="kontrol.jsp?action=changedb&db=3">4. Parkina</a>
-    <a href="kontrol.jsp?action=changedb&db=4">5. Parkina</a>
-    <a href="kontrol.jsp?action=changedb&db=5">6. Parkina</a>
-    <a href="kontrol.jsp?action=changedb&db=6">7. Parkina</a>
-    <a href="kontrol.jsp?action=changedb&db=7">8. Parkina</a>
-    <a href="kontrol.jsp?action=changedb&db=8">9. Parkina</a>
-    <a href="kontrol.jsp?action=changedb&db=9">10. Parkina</a>
+    <%--<%=gauzak.getInzidentziak()%>--%>
+	<p style="margin-top:0.7em">
+	<iframe
+		name="iframe1"
+		width="700"
+		height="400"
+		src="inzidentziaTaula.jsp"
+		frameborder="no"
+		scrolling="yes">
+	</iframe>
+	</p>
 
-
-    <br/>
-    <br/>
-    <%--<%=gauzak.getInzidentziak()--%>
 </div>
 
 <div class="left">

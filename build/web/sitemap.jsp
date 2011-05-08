@@ -45,7 +45,6 @@
 <li><a href="index.jsp">Etxea</a></li>
 <li><a href="erabili.jsp">Nola Erabili</a></li>
 <li><a href="kontaktua.jsp">Kontaktua</a></li>
-<li><a href="cas/sitemap.jsp">En castellano</a></li>
 </ul>
 </div>
 
