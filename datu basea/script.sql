@@ -5,6 +5,11 @@ CREATE  TABLE Motak (
   mota VARCHAR(45) ,
   PRIMARY KEY (idMota) );
 
+CREATE  TABLE Departamentuak (
+  idDepartametua serial ,
+  Departamentua VARCHAR(45) ,
+  PRIMARY KEY (idDepartamentua) );
+
 CREATE  TABLE CI (
   idCI serial ,
   Deskribapena VARCHAR(300),
@@ -42,7 +47,10 @@ CREATE  TABLE Langileak(
   Telefonoa VARCHAR(45) ,
   Salarioa DECIMAL(10,0) ,
   Postua VARCHAR(45),
-  PRIMARY KEY (idLangileak) );
+  PRIMARY KEY (idLangileak),
+  CONSTRAINT LangileakDeptFK
+    FOREIGN KEY (idDepartamentua )
+    REFERENCES Departamentuak (idDepartamentua ) );
 
 CREATE  TABLE CILangileak (
   idCILangile serial,
