@@ -6,14 +6,14 @@ CREATE  TABLE Motak (
   PRIMARY KEY (idMota) );
 
 CREATE  TABLE Departamentuak (
-  idDepartametua serial ,
+  idDepartamentua serial ,
   Departamentua VARCHAR(45) ,
   PRIMARY KEY (idDepartamentua) );
 
 CREATE  TABLE CI (
   idCI serial ,
   Deskribapena VARCHAR(300),
-  idMota  integeregereger,
+  idMota  integer,
   Jabea VARCHAR(60),
   AEKapa VARCHAR(45),
   Marka VARCHAR(200),
@@ -34,7 +34,7 @@ CREATE  TABLE CI (
   Kontaktua VARCHAR(45),
   Sinatzailea VARCHAR(45),
   PRIMARY KEY (idCI) ,
-  CONSTRA integereger CIMotaFk
+  CONSTRAINT CIMotaFk
     FOREIGN KEY (idMota )
     REFERENCES Motak (idMota)
 );
@@ -47,6 +47,7 @@ CREATE  TABLE Langileak(
   Telefonoa VARCHAR(45) ,
   Salarioa DECIMAL(10,0) ,
   Postua VARCHAR(45),
+  idDepartamentua integer,
   PRIMARY KEY (idLangileak),
   CONSTRAINT LangileakDeptFK
     FOREIGN KEY (idDepartamentua )
