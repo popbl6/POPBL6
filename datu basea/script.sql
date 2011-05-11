@@ -47,6 +47,7 @@ CREATE  TABLE Langileak(
   Telefonoa VARCHAR(45) ,
   Salarioa DECIMAL(10,0) ,
   Postua VARCHAR(45),
+  pasahitza varchar(45),
   idDepartamentua integer,
   PRIMARY KEY (idLangileak),
   CONSTRAINT LangileakDeptFK
