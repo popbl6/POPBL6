@@ -217,6 +217,21 @@ public class Gauzak {
 		return buff;
 	}
 
+	public String getInzidentziaMotak(){
+		String buff = "";
+
+		buff += placeholderOption(5);
+
+		return buff;
+	}
+
+	private String placeholderOption(int num){
+		String buff = "";
+		for(int i=0; i<num; i++)
+			buff += "<option>Option"+i+"</option>";
+		return buff;
+	}
+
 	private String placeholderTable(int columns, int rows) {
 		String buff = "";
 
