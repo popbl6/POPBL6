@@ -165,7 +165,7 @@ public class Gauzak {
 	public String getInzidentziak(){
 		try{
 			String buff = "";
-			/*PreparedStatement stmt = CMDB.prepareStatement("select getInzidentziak()");
+			PreparedStatement stmt = CMDB.prepareStatement("select getInzidentziak()");
 			ResultSet rs = stmt.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			rs.next();
@@ -193,10 +193,10 @@ public class Gauzak {
 				buff += "\t\t</tr>\n";
 			} while(rs.next());
 			buff += "\t<tbody>\n";
-			buff += "<table>\n";*/
+			buff += "<table>\n";
 
 
-			buff += placeholderTable(10, 10);
+			//buff += placeholderTable(10, 10);
 
 			return buff;
 		}catch(Exception e){
@@ -261,7 +261,7 @@ public class Gauzak {
 		try{
 			String buff = "";
 			int kod = Integer.parseInt(mota);
-			/*PreparedStatement stmt = CMDB.prepareStatement("select getAktiboak(?)");
+			PreparedStatement stmt = CMDB.prepareStatement("select getAktiboak(?)");
 			stmt.setInt(1, kod);
 			ResultSet rs = stmt.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
@@ -288,10 +288,10 @@ public class Gauzak {
 				buff += "\t\t</tr>\n";
 			} while(rs.next());
 			buff += "\t<tbody>\n";
-			buff += "<table>\n";*/
+			buff += "<table>\n";
 
 
-			buff += placeholderTable(15, kod*2);
+			//buff += placeholderTable(15, kod*2);
 
 			return buff;
 		}catch(Exception e){
@@ -303,13 +303,13 @@ public class Gauzak {
 	public String getInzidentziaMotak(){
 		try{
 			String buff = "";
-			/*PreparedStatement stmt = CMDB.prepareStatement("select inzidentziaMotak()");
+			PreparedStatement stmt = CMDB.prepareStatement("select inzidentziaMotak()");
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 				buff += "<option value="+rs.getString(1)+">"+rs.getString(2)+"</option>";
-			}*/
+			}
 
-			buff += placeholderOption(5);
+			//buff += placeholderOption(5);
 			
 			return buff;
 		}catch(Exception e){
@@ -327,13 +327,13 @@ public class Gauzak {
 	public String getAktiboMotak(String aukeratua){
 		try{
 			String buff = "";
-			/*PreparedStatement stmt = CMDB.prepareStatement("select motak()");
+			PreparedStatement stmt = CMDB.prepareStatement("select motak()");
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 				buff += "<option value="+rs.getString(1)+" onClick=\"this.form.submit()\" "+(rs.getString(1).equals(aukeratua)?"selected=selected":"")+">"+rs.getString(2)+"</option>";
-			}*/
+			}
 
-			buff += placeholderOption(10);
+			//buff += placeholderOption(10);
 
 			return buff;
 		}catch(Exception e){
