@@ -58,7 +58,7 @@
 	<p style="margin-top:0.7em">
 		<form action="aktiboak.jsp">
 			<select name="mota">
-				<%=gauzak.getAktiboMotak()%>
+				<%=gauzak.getAktiboMotak(request.getParameter("mota"))%>
 			</select>
 		</form>
 		<iframe

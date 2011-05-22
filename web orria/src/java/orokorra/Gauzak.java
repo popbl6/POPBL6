@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.logging.Level;
@@ -45,7 +47,7 @@ public class Gauzak {
 	private void konexioakEgin() throws ClassNotFoundException, SQLException {
 		Class.forName("org.postgresql.Driver");
 		webDb = DriverManager.getConnection("jdbc:postgresql://localhost:5432/web", "web", "1111");
-		//CMDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/CMDB", "web", "1111");
+		CMDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/CMDB", "web", "1111");
 	}
 
 
@@ -260,8 +262,10 @@ public class Gauzak {
 	public String getAktiboak(String mota){
 		try{
 			String buff = "";
+			if(mota == null || mota.equals("null"))
+				mota = "1";
 			int kod = Integer.parseInt(mota);
-			PreparedStatement stmt = CMDB.prepareStatement("select getAktiboak(?)");
+			PreparedStatement stmt = CMDB.prepareStatement("select * from ci where idmota=?");
 			stmt.setInt(1, kod);
 			ResultSet rs = stmt.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
@@ -280,10 +284,13 @@ public class Gauzak {
                 +	"\t</thead>\n"
                 +	"\t<tbody>\n";
 			do{
-				Enumeration<Integer> zenb = zutabeak.keys();
+				ArrayList<Integer> zenb = Collections.list(zutabeak.keys());
+				//Collections.reverse(zenb);
+				Collections.sort(zenb);
 				buff += "\t\t<tr>\n";
-				while(zenb.hasMoreElements()){
-					buff += "\t\t\t<td>"+rs.getString(zenb.nextElement())+"</td>\n";
+				for(Integer i : zenb){
+					System.out.println("Zenbaki "+i+"\tZutabe "+zutabeak.get(i)+"\tDatua "+rs.getString(i));
+					buff += "\t\t\t<td>"+rs.getString(i)+"</td>\n";
 				}
 				buff += "\t\t</tr>\n";
 			} while(rs.next());
@@ -303,7 +310,7 @@ public class Gauzak {
 	public String getInzidentziaMotak(){
 		try{
 			String buff = "";
-			PreparedStatement stmt = CMDB.prepareStatement("select inzidentziaMotak()");
+			PreparedStatement stmt = CMDB.prepareStatement("select * from inzidentziaMotak");
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 				buff += "<option value="+rs.getString(1)+">"+rs.getString(2)+"</option>";
@@ -327,10 +334,14 @@ public class Gauzak {
 	public String getAktiboMotak(String aukeratua){
 		try{
 			String buff = "";
-			PreparedStatement stmt = CMDB.prepareStatement("select motak()");
+			PreparedStatement stmt = CMDB.prepareStatement("select * from motak() as (id integer, mota varchar)");
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
-				buff += "<option value="+rs.getString(1)+" onClick=\"this.form.submit()\" "+(rs.getString(1).equals(aukeratua)?"selected=selected":"")+">"+rs.getString(2)+"</option>";
+				String auk = "";
+				if(rs.getString(1).equals(aukeratua)){
+					auk = "selected=selected";
+				}
+				buff += "<option value="+rs.getString(1)+" onClick=\"this.form.submit()\" "+auk+">"+rs.getString(2)+"</option>";
 			}
 
 			//buff += placeholderOption(10);
