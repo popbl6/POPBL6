@@ -50,6 +50,10 @@ public class Gauzak {
 		CMDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/CMDB", "web", "1111");
 	}
 
+	public boolean logeatuta(){
+		return mota != -1;
+	}
+
 
 	public void logout(){
 		user = "guest";
@@ -167,10 +171,11 @@ public class Gauzak {
 	public String getInzidentziak(){
 		try{
 			String buff = "";
-			PreparedStatement stmt = CMDB.prepareStatement("select getInzidentziak()");
+			PreparedStatement stmt = CMDB.prepareStatement("select * from inzidentziak where konponduta != true");
 			ResultSet rs = stmt.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
-			rs.next();
+			if(!rs.next())
+				return "Ez dago inzidentziarik";
 			Hashtable<Integer, String> zutabeak = new Hashtable<Integer, String>();
 			buff += "<table class=inzidentziak>\n"
 				+	"\t<thead>\n"
@@ -185,13 +190,14 @@ public class Gauzak {
 			buff +=	"\t\t</tr>\n"
                 +	"\t</thead>\n"
                 +	"\t<tbody>\n";
+			ArrayList<Integer> zenb = Collections.list(zutabeak.keys());
+			Collections.sort(zenb);
 			do{
-				Enumeration<Integer> zenb = zutabeak.keys();
 				buff += "\t\t<tr>\n";
-				while(zenb.hasMoreElements()){
-					buff += "\t\t\t<td>"+rs.getString(zenb.nextElement())+"</td>\n";
+				for(Integer i : zenb){
+					buff += "\t\t\t<td>"+rs.getString(i)+"</td>\n";
 				}
-				buff += "\t\t\t<td><<input type=\"submit\" value=\"Itxi\" name=\""+rs.getString(1)+"\" /></td>\n";
+				buff += "\t\t\t<td><button type=\"submit\" name=\"Itxi\" value=\""+rs.getString(1)+"\" />Itxi</button></td>\n";
 				buff += "\t\t</tr>\n";
 			} while(rs.next());
 			buff += "\t<tbody>\n";
@@ -269,7 +275,8 @@ public class Gauzak {
 			stmt.setInt(1, kod);
 			ResultSet rs = stmt.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
-			rs.next();
+			if(!rs.next())
+				return "Ez dago mota honetako CI-rik";
 			Hashtable<Integer, String> zutabeak = new Hashtable<Integer, String>();
 			buff += "<table class=inzidentziak>\n"
 				+	"\t<thead>\n"
@@ -283,10 +290,9 @@ public class Gauzak {
 			buff +=			"\t\t</tr>\n"
                 +	"\t</thead>\n"
                 +	"\t<tbody>\n";
+			ArrayList<Integer> zenb = Collections.list(zutabeak.keys());
+			Collections.sort(zenb);
 			do{
-				ArrayList<Integer> zenb = Collections.list(zutabeak.keys());
-				//Collections.reverse(zenb);
-				Collections.sort(zenb);
 				buff += "\t\t<tr>\n";
 				for(Integer i : zenb){
 					System.out.println("Zenbaki "+i+"\tZutabe "+zutabeak.get(i)+"\tDatua "+rs.getString(i));

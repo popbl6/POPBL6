@@ -59,7 +59,7 @@
 				gauzak.inzidentziaItxi(request.getParameter("inziKod"),
 						request.getParameter("nola"),
 						request.getParameter("langKod"));
-			url = "index.jsp";
+			url = "inzidentziaTaula.jsp";
 		}
 	}
 

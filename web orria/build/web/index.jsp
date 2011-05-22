@@ -76,9 +76,12 @@ Jarri dagoen pagina beste kolore batez agertzea
 
 <h2>Ongi Etorri </h2>
 <p>Zigka  parking-aren webgunea duzu.<br />
-  Sesioa hasi, bestela <a href="erregistroa.jsp">erregistratu </a> zaitez.<br />
-  <br />
-  <br />
+	<%
+		if(!gauzak.logeatuta())
+			out.println("Sesioa hasi, bestela <a href=\"erregistroa.jsp\">erregistratu </a> zaitez.<br />");
+	%>
+	<br />
+	<br />
 </p>
 </div>
 
