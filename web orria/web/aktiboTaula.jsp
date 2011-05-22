@@ -17,6 +17,6 @@
         <title>Inzidentzia taula</title>
     </head>
     <body>
-		<%=gauzak.getAktiboak()%>
+		<%=gauzak.getAktiboak(request.getParameter("mota"))%>
     </body>
 </html>

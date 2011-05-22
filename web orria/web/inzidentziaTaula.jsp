@@ -22,6 +22,8 @@
 				response.sendRedirect(request.getContextPath()+"/index.jsp");
 			}
 		%>
-		<%=gauzak.getInzidentziak()%>
+		<form action="inzidentziaItxi.jsp">
+			<%=gauzak.getInzidentziak()%>
+		</form>
     </body>
 </html>

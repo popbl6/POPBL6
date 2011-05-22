@@ -56,14 +56,19 @@
 <div class="right">
     <%--<%=gauzak.getInzidentziak()%>--%>
 	<p style="margin-top:0.7em">
-	<iframe
-		name="iframe1"
-		width="700"
-		height="400"
-		src="aktiboTaula.jsp"
-		frameborder="no"
-		scrolling="yes">
-	</iframe>
+		<form action="aktiboak.jsp">
+			<select name="mota">
+				<%=gauzak.getAktiboMotak()%>
+			</select>
+		</form>
+		<iframe
+			name="iframe1"
+			width="700"
+			height="400"
+			src="aktiboTaula.jsp?mota=<%=request.getParameter("mota")%>"
+			frameborder="no"
+			scrolling="yes">
+		</iframe>
 	</p>
 
 </div>

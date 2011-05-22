@@ -28,26 +28,41 @@
 			}
 		}
 		if(request.getParameter("action").equals("registerAdmin")){
-			String user = request.getParameter("username");
-			String pass = request.getParameter("password");
-			String email = request.getParameter("email");
-			int mota;
-			if(request.getParameter("mota").equals("mantenu"))
-				mota = 1;
-			else
-				mota = 2;
-			if(!gauzak.erregistratu(user, pass, email, mota)){
-				url = "erregistroa.jsp?msg=Errore bat erregistratzean";
+			if(gauzak.getMota() >= 1){
+				String user = request.getParameter("username");
+				String pass = request.getParameter("password");
+				String email = request.getParameter("email");
+				int mota;
+				if(request.getParameter("mota").equals("mantenu"))
+					mota = 1;
+				else
+					mota = 2;
+				if(!gauzak.erregistratu(user, pass, email, mota)){
+					url = "erregistroa.jsp?msg=Errore bat erregistratzean";
+				}
 			}
 		}
 		if(request.getParameter("action").equals("logout")){
 			gauzak.logout();
 			url = "index.jsp";
 		}
+		if(request.getParameter("action").equals("inzidentziaSortu")){
+			gauzak.inzidentziaZabaldu(request.getParameter("idLangile"),
+					request.getParameter("deskribapena"),
+					request.getParameter("idCI"),
+					request.getParameter("mota"));
+			url = "index.jsp";
+		}
+
+		if(request.getParameter("action").equals("inzidentziaItxi")){
+			if(gauzak.getMota() >= 1)
+				gauzak.inzidentziaItxi(request.getParameter("inziKod"),
+						request.getParameter("nola"),
+						request.getParameter("langKod"));
+			url = "index.jsp";
+		}
 	}
-		//String bidea = gauzak.bilatu("1", "7");
 
 		
 %>
-		<%--<a href="<%=request.getContextPath()%>/Mapa?bidea=<%=bidea%>">aa</a>--%>
 		<jsp:forward page="<%=url%>"/>

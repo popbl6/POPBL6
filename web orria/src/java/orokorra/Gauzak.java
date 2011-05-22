@@ -9,7 +9,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +24,7 @@ import java.util.logging.Logger;
 public class Gauzak {
 	int mota = -1;
 	String user = "guest";
-	Connection webDb;
+	Connection webDb, CMDB;
 	int inziPark = 0;
 	String taula = "";
 	int dbAktibo = 0;
@@ -42,7 +45,7 @@ public class Gauzak {
 	private void konexioakEgin() throws ClassNotFoundException, SQLException {
 		Class.forName("org.postgresql.Driver");
 		webDb = DriverManager.getConnection("jdbc:postgresql://localhost:5432/web", "web", "1111");
-		//CMDB-ra konektatu
+		//CMDB = DriverManager.getConnection("jdbc:postgresql://localhost:5432/CMDB", "web", "1111");
 	}
 
 
@@ -159,76 +162,190 @@ public class Gauzak {
 	}
 
 
-	/*public String getInzidentziak(){
-            String taula="Errorea datu basetik kargatzerakoan.";
-            PreparedStatement stmt;
-            ResultSet rs;
-            try {
-                    stmt=parkingDb[dbAktibo].prepareStatement("select * from jasoinzidentziak() as (kod integer, time timestamp, zer varchar, mikrokod int, sentskod int);");
-                    rs=stmt.executeQuery();
-                    taula=      "<table class=inzidentziak>\n"
-                               +"<thead>\n"
-                               +    "<tr>\n"
-                               +"        <td>Inzidentzi Kodea</td>\n"
-                               +"        <td>Inzidenatzia Ordua</td>\n"
-                               +"        <td>Deskribapena</td>\n"
-                               +"        <td>Mikro Kodea</td>\n"
-                               +"        <td>Sentsore Kodea</td>\n"
-                               +"        <td>Konponketa</td>\n"
-                               +"   </tr>\n"
-                               +"</thead>\n"
-                               +"<tbody>\n";
-
-                    while(rs.next()){
-                        taula+=         "<tr>\n"
-                                        +"         <td>"+rs.getInt(1)+"</td>\n"
-                                        +"         <td>"+rs.getTime(2)+"</td>\n"
-                                        +"         <td>"+rs.getString(3)+"</td>\n"
-                                        +"         <td>"+rs.getInt(4)+"</td>\n"
-                                        +"         <td>"+rs.getInt(5)+"</td>\n"
-                                        +"         <td><a href=kontrol.jsp?action=konpondu&mikroa="+rs.getInt(4)+"&sents="+rs.getInt(5)+">Konpondu</a>\n"
-                                        +"</tr>\n";
-                    }
-                    taula+=  "<tbody>\n"
-                            +"</table>\n";
-					return taula;
-            } catch (SQLException e) {
-				e.printStackTrace();
-            }
-			return "";
-        }*/
-	
-	//Inzidentzia konpondu funtzioa egin
-
-
 	public String getInzidentziak(){
-		String buff = "";
+		try{
+			String buff = "";
+			/*PreparedStatement stmt = CMDB.prepareStatement("select getInzidentziak()");
+			ResultSet rs = stmt.executeQuery();
+			ResultSetMetaData rsmd = rs.getMetaData();
+			rs.next();
+			Hashtable<Integer, String> zutabeak = new Hashtable<Integer, String>();
+			buff += "<table class=inzidentziak>\n"
+				+	"\t<thead>\n"
+                +		"\t\t<tr>\n";
+			for(int i=1; i<=rsmd.getColumnCount(); i++){
+				if(rs.getString(i) != null){
+					zutabeak.put(i, rsmd.getColumnName(i));
+					buff +=	"\t\t\t<td>"+rsmd.getColumnName(i)+"</td>\n";
+				}
+			}
+			buff += "\t\t\t<td>Itxi</td>\n";
+			buff +=	"\t\t</tr>\n"
+                +	"\t</thead>\n"
+                +	"\t<tbody>\n";
+			do{
+				Enumeration<Integer> zenb = zutabeak.keys();
+				buff += "\t\t<tr>\n";
+				while(zenb.hasMoreElements()){
+					buff += "\t\t\t<td>"+rs.getString(zenb.nextElement())+"</td>\n";
+				}
+				buff += "\t\t\t<td><<input type=\"submit\" value=\"Itxi\" name=\""+rs.getString(1)+"\" /></td>\n";
+				buff += "\t\t</tr>\n";
+			} while(rs.next());
+			buff += "\t<tbody>\n";
+			buff += "<table>\n";*/
 
-		buff += placeholderTable(10, 10);
 
-		return buff;
+			buff += placeholderTable(10, 10);
+
+			return buff;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "Errore bat egon da";
+	}
+	
+	public boolean inzidentziaItxi(String inziKod, String nola, String langKod){
+		try{
+			PreparedStatement stmt = CMDB.prepareStatement("select checkUser(?)");
+			stmt.setInt(1, Integer.parseInt(langKod));
+			ResultSet rs = stmt.executeQuery();
+			if(!rs.next())
+				return false;
+			if(rs.getString(1) == null)
+				return false;
+			stmt = CMDB.prepareStatement("select InzidentziaItxi(?, ?, ?)");
+			stmt.setInt(1, Integer.parseInt(langKod));
+			stmt.setString(2, nola);
+			stmt.setInt(3, Integer.parseInt(inziKod));
+			return stmt.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
-	public String getAktiboak(){
-		String buff = "";
 
-		buff += placeholderTable(15, 30);
+	public boolean inzidentziaZabaldu(String langKod, String desk, String CIkod, String mota){
+		try{
+			//Erabiltzailea existitzen dela frogatu
+			PreparedStatement stmt = CMDB.prepareStatement("select checkUser(?)");
+			stmt.setInt(1, Integer.parseInt(langKod));
+			ResultSet rs = stmt.executeQuery();
+			if(!rs.next())
+				return false;
+			if(rs.getString(1) == null)
+				return false;
+			//CI-a existitzen dela frogatu
+			stmt = CMDB.prepareStatement("select checkCI(?)");
+			stmt.setInt(1, Integer.parseInt(CIkod));
+			rs = stmt.executeQuery();
+			if(!rs.next())
+				return false;
+			if(!rs.getBoolean(1))
+				return false;
+			//Inzidentzia sortu
+			stmt = CMDB.prepareStatement("select InzidentziaSortu(?, ?, ?, ?)");
+			stmt.setInt(1, Integer.parseInt(langKod));
+			stmt.setString(2, desk);
+			stmt.setInt(3, Integer.parseInt(CIkod));
+			stmt.setInt(4, Integer.parseInt(mota));
+			return stmt.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
-		return buff;
+	public String getAktiboak(String mota){
+		try{
+			String buff = "";
+			int kod = Integer.parseInt(mota);
+			/*PreparedStatement stmt = CMDB.prepareStatement("select getAktiboak(?)");
+			stmt.setInt(1, kod);
+			ResultSet rs = stmt.executeQuery();
+			ResultSetMetaData rsmd = rs.getMetaData();
+			rs.next();
+			Hashtable<Integer, String> zutabeak = new Hashtable<Integer, String>();
+			buff += "<table class=inzidentziak>\n"
+				+	"\t<thead>\n"
+                +		"\t\t<tr>\n";
+			for(int i=1; i<=rsmd.getColumnCount(); i++){
+				if(rs.getString(i) != null){
+					zutabeak.put(i, rsmd.getColumnName(i));
+					buff +=	"\t\t\t<td>"+rsmd.getColumnName(i)+"</td>\n";
+				}
+			}
+			buff +=			"\t\t</tr>\n"
+                +	"\t</thead>\n"
+                +	"\t<tbody>\n";
+			do{
+				Enumeration<Integer> zenb = zutabeak.keys();
+				buff += "\t\t<tr>\n";
+				while(zenb.hasMoreElements()){
+					buff += "\t\t\t<td>"+rs.getString(zenb.nextElement())+"</td>\n";
+				}
+				buff += "\t\t</tr>\n";
+			} while(rs.next());
+			buff += "\t<tbody>\n";
+			buff += "<table>\n";*/
+
+
+			buff += placeholderTable(15, kod*2);
+
+			return buff;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "Errore bat egon da";
 	}
 
 	public String getInzidentziaMotak(){
-		String buff = "";
+		try{
+			String buff = "";
+			/*PreparedStatement stmt = CMDB.prepareStatement("select inzidentziaMotak()");
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()){
+				buff += "<option value="+rs.getString(1)+">"+rs.getString(2)+"</option>";
+			}*/
 
-		buff += placeholderOption(5);
+			buff += placeholderOption(5);
+			
+			return buff;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "Errore bat egon da";
+	}
 
-		return buff;
+
+	/**
+	 * Funtzio honetako option denek onClick="this.form.submit()" izan behar dute
+	 *
+	 * @return
+	 */
+	public String getAktiboMotak(String aukeratua){
+		try{
+			String buff = "";
+			/*PreparedStatement stmt = CMDB.prepareStatement("select motak()");
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()){
+				buff += "<option value="+rs.getString(1)+" onClick=\"this.form.submit()\" "+(rs.getString(1).equals(aukeratua)?"selected=selected":"")+">"+rs.getString(2)+"</option>";
+			}*/
+
+			buff += placeholderOption(10);
+
+			return buff;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "Errore bat egon da";
 	}
 
 	private String placeholderOption(int num){
 		String buff = "";
 		for(int i=0; i<num; i++)
-			buff += "<option>Option"+i+"</option>";
+			buff += "<option value="+i+" onClick=\"this.form.submit()\">Option"+i+"</option>";
 		return buff;
 	}
 
