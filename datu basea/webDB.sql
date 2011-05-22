@@ -10,18 +10,18 @@ SET client_min_messages = warning;
 SET escape_string_warning = off;
 
 --
--- Name: plpgsql; Type: PROCEDURAL LANGUAGE; Schema: -; Owner: ugaitz
+-- Name: plpgsql; Type: PROCEDURAL LANGUAGE; Schema: -; Owner: jabea
 --
 
 CREATE PROCEDURAL LANGUAGE plpgsql;
 
 
-ALTER PROCEDURAL LANGUAGE plpgsql OWNER TO ugaitz;
+ALTER PROCEDURAL LANGUAGE plpgsql OWNER TO jabea;
 
 SET search_path = public, pg_catalog;
 
 --
--- Name: aldatuerabiltzailea(text, text); Type: FUNCTION; Schema: public; Owner: ugaitz
+-- Name: aldatuerabiltzailea(text, text); Type: FUNCTION; Schema: public; Owner: jabea
 --
 
 CREATE FUNCTION aldatuerabiltzailea(text, text) RETURNS void
@@ -31,10 +31,10 @@ CREATE FUNCTION aldatuerabiltzailea(text, text) RETURNS void
 $_$;
 
 
-ALTER FUNCTION public.aldatuerabiltzailea(text, text) OWNER TO ugaitz;
+ALTER FUNCTION public.aldatuerabiltzailea(text, text) OWNER TO jabea;
 
 --
--- Name: bidalierabiltzailea(text, text, integer, text); Type: FUNCTION; Schema: public; Owner: ugaitz
+-- Name: bidalierabiltzailea(text, text, integer, text); Type: FUNCTION; Schema: public; Owner: jabea
 --
 
 CREATE FUNCTION bidalierabiltzailea(text, text, integer, text) RETURNS boolean
@@ -56,10 +56,10 @@ end
 $_$;
 
 
-ALTER FUNCTION public.bidalierabiltzailea(text, text, integer, text) OWNER TO ugaitz;
+ALTER FUNCTION public.bidalierabiltzailea(text, text, integer, text) OWNER TO jabea;
 
 --
--- Name: bidaliusermota(text); Type: FUNCTION; Schema: public; Owner: ugaitz
+-- Name: bidaliusermota(text); Type: FUNCTION; Schema: public; Owner: jabea
 --
 
 CREATE FUNCTION bidaliusermota(text) RETURNS void
@@ -69,10 +69,10 @@ insert into userMota(usermotaizen) values($1);
 $_$;
 
 
-ALTER FUNCTION public.bidaliusermota(text) OWNER TO ugaitz;
+ALTER FUNCTION public.bidaliusermota(text) OWNER TO jabea;
 
 --
--- Name: checkuser(text, text); Type: FUNCTION; Schema: public; Owner: ugaitz
+-- Name: checkuser(text, text); Type: FUNCTION; Schema: public; Owner: jabea
 --
 
 CREATE FUNCTION checkuser(text, text) RETURNS integer
@@ -84,10 +84,10 @@ select usermota from erabiltzaileak where username = $1 and password = md5($2);
 $_$;
 
 
-ALTER FUNCTION public.checkuser(text, text) OWNER TO ugaitz;
+ALTER FUNCTION public.checkuser(text, text) OWNER TO jabea;
 
 --
--- Name: ezabatuerabiltzailea(text); Type: FUNCTION; Schema: public; Owner: ugaitz
+-- Name: ezabatuerabiltzailea(text); Type: FUNCTION; Schema: public; Owner: jabea
 --
 
 CREATE FUNCTION ezabatuerabiltzailea(text) RETURNS void
@@ -97,10 +97,10 @@ CREATE FUNCTION ezabatuerabiltzailea(text) RETURNS void
 $_$;
 
 
-ALTER FUNCTION public.ezabatuerabiltzailea(text) OWNER TO ugaitz;
+ALTER FUNCTION public.ezabatuerabiltzailea(text) OWNER TO jabea;
 
 --
--- Name: ezabatuusermota(text); Type: FUNCTION; Schema: public; Owner: ugaitz
+-- Name: ezabatuusermota(text); Type: FUNCTION; Schema: public; Owner: jabea
 --
 
 CREATE FUNCTION ezabatuusermota(text) RETURNS void
@@ -110,14 +110,14 @@ delete from usermota where usermotaizen=$1;
 $_$;
 
 
-ALTER FUNCTION public.ezabatuusermota(text) OWNER TO ugaitz;
+ALTER FUNCTION public.ezabatuusermota(text) OWNER TO jabea;
 
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: erabiltzaileak; Type: TABLE; Schema: public; Owner: ugaitz; Tablespace: 
+-- Name: erabiltzaileak; Type: TABLE; Schema: public; Owner: jabea; Tablespace: 
 --
 
 CREATE TABLE erabiltzaileak (
@@ -129,10 +129,10 @@ CREATE TABLE erabiltzaileak (
 );
 
 
-ALTER TABLE public.erabiltzaileak OWNER TO ugaitz;
+ALTER TABLE public.erabiltzaileak OWNER TO jabea;
 
 --
--- Name: erabiltzaileak_userkod_seq; Type: SEQUENCE; Schema: public; Owner: ugaitz
+-- Name: erabiltzaileak_userkod_seq; Type: SEQUENCE; Schema: public; Owner: jabea
 --
 
 CREATE SEQUENCE erabiltzaileak_userkod_seq
@@ -143,24 +143,24 @@ CREATE SEQUENCE erabiltzaileak_userkod_seq
     CACHE 1;
 
 
-ALTER TABLE public.erabiltzaileak_userkod_seq OWNER TO ugaitz;
+ALTER TABLE public.erabiltzaileak_userkod_seq OWNER TO jabea;
 
 --
--- Name: erabiltzaileak_userkod_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ugaitz
+-- Name: erabiltzaileak_userkod_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: jabea
 --
 
 ALTER SEQUENCE erabiltzaileak_userkod_seq OWNED BY erabiltzaileak.userkod;
 
 
 --
--- Name: erabiltzaileak_userkod_seq; Type: SEQUENCE SET; Schema: public; Owner: ugaitz
+-- Name: erabiltzaileak_userkod_seq; Type: SEQUENCE SET; Schema: public; Owner: jabea
 --
 
 SELECT pg_catalog.setval('erabiltzaileak_userkod_seq', 8, true);
 
 
 --
--- Name: usermota; Type: TABLE; Schema: public; Owner: ugaitz; Tablespace: 
+-- Name: usermota; Type: TABLE; Schema: public; Owner: jabea; Tablespace: 
 --
 
 CREATE TABLE usermota (
@@ -169,10 +169,10 @@ CREATE TABLE usermota (
 );
 
 
-ALTER TABLE public.usermota OWNER TO ugaitz;
+ALTER TABLE public.usermota OWNER TO jabea;
 
 --
--- Name: usermota_usermota_seq; Type: SEQUENCE; Schema: public; Owner: ugaitz
+-- Name: usermota_usermota_seq; Type: SEQUENCE; Schema: public; Owner: jabea
 --
 
 CREATE SEQUENCE usermota_usermota_seq
@@ -183,38 +183,38 @@ CREATE SEQUENCE usermota_usermota_seq
     CACHE 1;
 
 
-ALTER TABLE public.usermota_usermota_seq OWNER TO ugaitz;
+ALTER TABLE public.usermota_usermota_seq OWNER TO jabea;
 
 --
--- Name: usermota_usermota_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ugaitz
+-- Name: usermota_usermota_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: jabea
 --
 
 ALTER SEQUENCE usermota_usermota_seq OWNED BY usermota.usermota;
 
 
 --
--- Name: usermota_usermota_seq; Type: SEQUENCE SET; Schema: public; Owner: ugaitz
+-- Name: usermota_usermota_seq; Type: SEQUENCE SET; Schema: public; Owner: jabea
 --
 
 SELECT pg_catalog.setval('usermota_usermota_seq', 1, false);
 
 
 --
--- Name: userkod; Type: DEFAULT; Schema: public; Owner: ugaitz
+-- Name: userkod; Type: DEFAULT; Schema: public; Owner: jabea
 --
 
 ALTER TABLE erabiltzaileak ALTER COLUMN userkod SET DEFAULT nextval('erabiltzaileak_userkod_seq'::regclass);
 
 
 --
--- Name: usermota; Type: DEFAULT; Schema: public; Owner: ugaitz
+-- Name: usermota; Type: DEFAULT; Schema: public; Owner: jabea
 --
 
 ALTER TABLE usermota ALTER COLUMN usermota SET DEFAULT nextval('usermota_usermota_seq'::regclass);
 
 
 --
--- Data for Name: erabiltzaileak; Type: TABLE DATA; Schema: public; Owner: ugaitz
+-- Data for Name: erabiltzaileak; Type: TABLE DATA; Schema: public; Owner: jabea
 --
 
 COPY erabiltzaileak (userkod, username, password, usermota, email) FROM stdin;
@@ -227,7 +227,7 @@ COPY erabiltzaileak (userkod, username, password, usermota, email) FROM stdin;
 
 
 --
--- Data for Name: usermota; Type: TABLE DATA; Schema: public; Owner: ugaitz
+-- Data for Name: usermota; Type: TABLE DATA; Schema: public; Owner: jabea
 --
 
 COPY usermota (usermota, usermotaizen) FROM stdin;
@@ -238,7 +238,7 @@ COPY usermota (usermota, usermotaizen) FROM stdin;
 
 
 --
--- Name: erabiltzaileak_pkey; Type: CONSTRAINT; Schema: public; Owner: ugaitz; Tablespace: 
+-- Name: erabiltzaileak_pkey; Type: CONSTRAINT; Schema: public; Owner: jabea; Tablespace: 
 --
 
 ALTER TABLE ONLY erabiltzaileak
@@ -246,7 +246,7 @@ ALTER TABLE ONLY erabiltzaileak
 
 
 --
--- Name: erabiltzaileak_username_key; Type: CONSTRAINT; Schema: public; Owner: ugaitz; Tablespace: 
+-- Name: erabiltzaileak_username_key; Type: CONSTRAINT; Schema: public; Owner: jabea; Tablespace: 
 --
 
 ALTER TABLE ONLY erabiltzaileak
@@ -254,7 +254,7 @@ ALTER TABLE ONLY erabiltzaileak
 
 
 --
--- Name: usermota_pkey; Type: CONSTRAINT; Schema: public; Owner: ugaitz; Tablespace: 
+-- Name: usermota_pkey; Type: CONSTRAINT; Schema: public; Owner: jabea; Tablespace: 
 --
 
 ALTER TABLE ONLY usermota
@@ -262,7 +262,7 @@ ALTER TABLE ONLY usermota
 
 
 --
--- Name: usermota_usermotaizen_key; Type: CONSTRAINT; Schema: public; Owner: ugaitz; Tablespace: 
+-- Name: usermota_usermotaizen_key; Type: CONSTRAINT; Schema: public; Owner: jabea; Tablespace: 
 --
 
 ALTER TABLE ONLY usermota
@@ -270,7 +270,7 @@ ALTER TABLE ONLY usermota
 
 
 --
--- Name: usermotafk; Type: FK CONSTRAINT; Schema: public; Owner: ugaitz
+-- Name: usermotafk; Type: FK CONSTRAINT; Schema: public; Owner: jabea
 --
 
 ALTER TABLE ONLY erabiltzaileak
@@ -288,7 +288,7 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
--- Name: aldatuerabiltzailea(text, text); Type: ACL; Schema: public; Owner: ugaitz
+-- Name: aldatuerabiltzailea(text, text); Type: ACL; Schema: public; Owner: jabea
 --
 
 REVOKE ALL ON FUNCTION aldatuerabiltzailea(text, text) FROM PUBLIC;
@@ -297,7 +297,7 @@ GRANT ALL ON FUNCTION aldatuerabiltzailea(text, text) TO "Programak";
 
 
 --
--- Name: bidalierabiltzailea(text, text, integer, text); Type: ACL; Schema: public; Owner: ugaitz
+-- Name: bidalierabiltzailea(text, text, integer, text); Type: ACL; Schema: public; Owner: jabea
 --
 
 REVOKE ALL ON FUNCTION bidalierabiltzailea(text, text, integer, text) FROM PUBLIC;
@@ -306,7 +306,7 @@ GRANT ALL ON FUNCTION bidalierabiltzailea(text, text, integer, text) TO "Program
 
 
 --
--- Name: bidaliusermota(text); Type: ACL; Schema: public; Owner: ugaitz
+-- Name: bidaliusermota(text); Type: ACL; Schema: public; Owner: jabea
 --
 
 REVOKE ALL ON FUNCTION bidaliusermota(text) FROM PUBLIC;
@@ -315,7 +315,7 @@ GRANT ALL ON FUNCTION bidaliusermota(text) TO "Programak";
 
 
 --
--- Name: checkuser(text, text); Type: ACL; Schema: public; Owner: ugaitz
+-- Name: checkuser(text, text); Type: ACL; Schema: public; Owner: jabea
 --
 
 REVOKE ALL ON FUNCTION checkuser(text, text) FROM PUBLIC;
@@ -324,7 +324,7 @@ GRANT ALL ON FUNCTION checkuser(text, text) TO "Programak";
 
 
 --
--- Name: ezabatuerabiltzailea(text); Type: ACL; Schema: public; Owner: ugaitz
+-- Name: ezabatuerabiltzailea(text); Type: ACL; Schema: public; Owner: jabea
 --
 
 REVOKE ALL ON FUNCTION ezabatuerabiltzailea(text) FROM PUBLIC;
@@ -333,7 +333,7 @@ GRANT ALL ON FUNCTION ezabatuerabiltzailea(text) TO "Programak";
 
 
 --
--- Name: ezabatuusermota(text); Type: ACL; Schema: public; Owner: ugaitz
+-- Name: ezabatuusermota(text); Type: ACL; Schema: public; Owner: jabea
 --
 
 REVOKE ALL ON FUNCTION ezabatuusermota(text) FROM PUBLIC;
@@ -342,7 +342,7 @@ GRANT ALL ON FUNCTION ezabatuusermota(text) TO "Programak";
 
 
 --
--- Name: erabiltzaileak; Type: ACL; Schema: public; Owner: ugaitz
+-- Name: erabiltzaileak; Type: ACL; Schema: public; Owner: jabea
 --
 
 REVOKE ALL ON TABLE erabiltzaileak FROM PUBLIC;
@@ -350,7 +350,7 @@ GRANT ALL ON TABLE erabiltzaileak TO "Programak";
 
 
 --
--- Name: erabiltzaileak_userkod_seq; Type: ACL; Schema: public; Owner: ugaitz
+-- Name: erabiltzaileak_userkod_seq; Type: ACL; Schema: public; Owner: jabea
 --
 
 REVOKE ALL ON SEQUENCE erabiltzaileak_userkod_seq FROM PUBLIC;
@@ -358,7 +358,7 @@ GRANT ALL ON SEQUENCE erabiltzaileak_userkod_seq TO "Programak";
 
 
 --
--- Name: usermota; Type: ACL; Schema: public; Owner: ugaitz
+-- Name: usermota; Type: ACL; Schema: public; Owner: jabea
 --
 
 REVOKE ALL ON TABLE usermota FROM PUBLIC;
@@ -366,7 +366,7 @@ GRANT ALL ON TABLE usermota TO "Programak";
 
 
 --
--- Name: usermota_usermota_seq; Type: ACL; Schema: public; Owner: ugaitz
+-- Name: usermota_usermota_seq; Type: ACL; Schema: public; Owner: jabea
 --
 
 REVOKE ALL ON SEQUENCE usermota_usermota_seq FROM PUBLIC;
