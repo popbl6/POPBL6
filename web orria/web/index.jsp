@@ -75,7 +75,7 @@ Jarri dagoen pagina beste kolore batez agertzea
 <div class="right">
 
 <h2>Ongi Etorri </h2>
-<p>Zigka  parking-aren webgunea duzu.<br />
+<p>Zigka enpresa-ren webgunea duzu.<br />
 	<br />
 	<br />
 </p>

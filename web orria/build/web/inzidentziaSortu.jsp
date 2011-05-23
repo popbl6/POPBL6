@@ -62,7 +62,7 @@
 </div>
 
 <div id="breadcrumb">
-<ul><a href="index.jsp">Etxea </a>><a href="erabili.jsp"> Nola Erabili</a></ul>
+<ul><a href="index.jsp">Etxea </a>><a href="inzidentziaSortu.jsp"> Inzidentzia zabaldu</a></ul>
 </div>
 
 <div id="menu">
