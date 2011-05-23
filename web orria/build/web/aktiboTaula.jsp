@@ -17,6 +17,11 @@
         <title>Inzidentzia taula</title>
     </head>
     <body>
+		<%
+		if(gauzak.getMota() < 0){
+			response.sendRedirect(request.getContextPath()+"/index.jsp");
+		}
+		%>
 		<%=gauzak.getAktiboak(request.getParameter("mota"))%>
     </body>
 </html>

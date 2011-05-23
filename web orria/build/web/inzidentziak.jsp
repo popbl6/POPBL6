@@ -71,6 +71,18 @@
 		scrolling="yes">
 	</iframe>
 	</p>
+	<p>Historikoa</p>
+	<p style="margin-top:0.7em">
+	<iframe
+		name="iframe1"
+		width="700"
+		height="400"
+		src="inzidentziaTaulaHistorikoa.jsp"
+		frameborder="no"
+		scrolling="yes">
+	</iframe>
+	</p>
+
 
 </div>
 

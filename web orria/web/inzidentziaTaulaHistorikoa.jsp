@@ -17,11 +17,13 @@
         <title>Inzidentzia taula</title>
     </head>
     <body>
-		<%
-		if(gauzak.getMota() < 0){
-			response.sendRedirect(request.getContextPath()+"/index.jsp");
-		}
+        <%
+			if(gauzak.getMota() < 1){
+				response.sendRedirect(request.getContextPath()+"/index.jsp");
+			}
 		%>
-		<%=gauzak.getAktiboak(request.getParameter("mota"))%>
+		<form action="inzidentziaItxi.jsp">
+			<%=gauzak.getInzidentziakHistoriko()%>
+		</form>
     </body>
 </html>

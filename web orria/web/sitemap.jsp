@@ -52,20 +52,7 @@
 <div class="right">
 
 <h2>Sitemap </h2>
-<ul type="circle">
-	<li><a href="index.jsp">Etxea </a></li>
-	<ul type="circle">
-		<li><a href="adminregister.jsp">Administratzaile erregistroa </a></li>
-		<li><a href="bideakerakutsi.jsp">Bideak erakutsi </a></li>
-		<li><a href="erabili.jsp">Nola erabili </a></li>
-		<li><a href="erregistroa.jsp">Erregistratu </a></li>
-		<li><a href="inzidentziak.jsp">Inzidentziak </a></li>
-		<li><a href="kalkulatu.jsp">Bideak kalkulatu </a></li>
-		<li><a href="kontaktua.jsp">Kontaktua </a></li>
-		<li><a href="loginerror.jsp">Login errorea </a></li>
-		<li><a href="tarifak.jsp">Tarifak kontsultatu </a></li>
-	</ul>
-</ul>
+
 
   <br />
 </div>

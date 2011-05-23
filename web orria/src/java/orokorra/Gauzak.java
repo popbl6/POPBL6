@@ -19,10 +19,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-/**
- *
- * @author ugaitz
- */
 public class Gauzak {
 	int mota = -1;
 	String user = "guest";
@@ -134,7 +130,6 @@ public class Gauzak {
 					 + "<ul>"
 					 + "<li><a href=\"aktiboak.jsp\">TI-ak kontsultatu</a></li>"
 					 + "<li><a href=\"inzidentziaSortu.jsp\">Inzidentzia berria</a></li>"
-					 + "<li><a href=\"adminregister.jsp\">Administratzaile erregistroa</a></li>"
 					 + "<li><a href=\"inzidentziak.jsp\">Inzidentziak kudeatu</a></li>"
 					 + "</ul>";
 		}
@@ -152,19 +147,13 @@ public class Gauzak {
 				 + "		</tr>"
 				 + "		<tr>"
 				 + "			<td> <div align=\"right\"><input name=\"submit\" type=\"submit\" value=\"login\" /></div></td>"
-				 + "		  <td><ul>"
-				 + "			<li><a href=\"erregistroa.jsp\">Erregistratu</a></li>"
-				 + "		  </ul></td>"
 				 + "		</tr>"
 				 + "	</table>"
 				 + "</form>"
 				 + ""
 				 + "		<h2>Menua :</h2>"
 				 + ""
-				 + "<ul>"
-				 + "<li><a href=\"aktiboak.jsp\">TI-ak kontsultatu</a></li>"
-				 + "<li><a href=\"inzidentziaSortu.jsp\">Inzidentzia berria</a></li>"
-				 + "</ul>";
+				 + "<div style=\"color:white;\">Logeatu aukerak ikusteko</div>";
 	}
 
 
@@ -172,6 +161,52 @@ public class Gauzak {
 		try{
 			String buff = "";
 			PreparedStatement stmt = CMDB.prepareStatement("select * from inzidentziak where konponduta != true");
+			ResultSet rs = stmt.executeQuery();
+			ResultSetMetaData rsmd = rs.getMetaData();
+			if(!rs.next())
+				return "Ez dago inzidentziarik";
+			Hashtable<Integer, String> zutabeak = new Hashtable<Integer, String>();
+			buff += "<table class=inzidentziak>\n"
+				+	"\t<thead>\n"
+                +		"\t\t<tr>\n";
+			for(int i=1; i<=rsmd.getColumnCount(); i++){
+				if(rs.getString(i) != null){
+					zutabeak.put(i, rsmd.getColumnName(i));
+					buff +=	"\t\t\t<td>"+rsmd.getColumnName(i)+"</td>\n";
+				}
+			}
+			buff += "\t\t\t<td>Itxi</td>\n";
+			buff +=	"\t\t</tr>\n"
+                +	"\t</thead>\n"
+                +	"\t<tbody>\n";
+			ArrayList<Integer> zenb = Collections.list(zutabeak.keys());
+			Collections.sort(zenb);
+			do{
+				buff += "\t\t<tr>\n";
+				for(Integer i : zenb){
+					buff += "\t\t\t<td>"+rs.getString(i)+"</td>\n";
+				}
+				buff += "\t\t\t<td><button type=\"submit\" name=\"Itxi\" value=\""+rs.getString(1)+"\" />Itxi</button></td>\n";
+				buff += "\t\t</tr>\n";
+			} while(rs.next());
+			buff += "\t<tbody>\n";
+			buff += "<table>\n";
+
+
+			//buff += placeholderTable(10, 10);
+
+			return buff;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "Errore bat egon da";
+	}
+
+
+	public String getInzidentziakHistoriko(){
+		try{
+			String buff = "";
+			PreparedStatement stmt = CMDB.prepareStatement("select * from inzidentziak where konponduta = true");
 			ResultSet rs = stmt.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			if(!rs.next())

@@ -52,11 +52,8 @@
 <div class="right">
 
 <h2>Nola erabili? </h2>
-<p>Aukeratu parametroak eta posizioa.</p>
-<p>Ondoren, bilaketari ekin eta kitto.</p>
-<p><img src="images/busqueda.jpg" alt="" width="347" height="346" /><br />
-  <br />
-</p>
+<p>CI ezberdinak ikusteko aukera.</p>
+<p>Inzidentzia bat zabaldu nahi ezkero CI-aren kodea eta zure langile kodea sartu eta arazoa azaldu</p>
 </div>
 
 <div class="left">

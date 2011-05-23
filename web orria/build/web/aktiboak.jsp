@@ -33,6 +33,11 @@
 
 </head>
 <body>
+	<%
+	if(gauzak.getMota() < 0){
+		response.sendRedirect(request.getContextPath()+"/index.jsp");
+	}
+	%>
 
 <div id="wrap">
 
